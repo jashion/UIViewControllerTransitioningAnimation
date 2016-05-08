@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailController : UIViewController
+@interface DetailController : UIViewController<UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIImageView *topImageView;
 @property (nonatomic, strong) UITableView *detailTableView;

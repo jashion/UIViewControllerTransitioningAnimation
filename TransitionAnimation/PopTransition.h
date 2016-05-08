@@ -11,14 +11,17 @@
 #import "MyTableViewCell.h"
 
 typedef NS_ENUM(NSInteger, PopTransitionType) {
-    PopTransitionSpringType
+    PopTransitionSpringType       = 0,
+    PopTransitionCircleMaskType   = 1
 };
 
 @interface PopTransition : NSObject<UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic, strong) MyTableViewCell *selectedCell;
 @property (nonatomic, assign) PopTransitionType type;
+@property (nonatomic, strong) UIView *finalView;
 @property (nonatomic, assign) CGRect finalFrame;
+@property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) BOOL completed;
 
 @end

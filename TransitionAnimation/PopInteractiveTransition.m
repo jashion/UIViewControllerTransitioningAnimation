@@ -16,12 +16,15 @@
 
 - (void)wireToViewController: (UIViewController *)viewController {
     toVC = viewController;
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget: self action: @selector(handleInteractiveGesture:)];
-    [viewController.view addGestureRecognizer: pan];
+    UIScreenEdgePanGestureRecognizer *screenEdgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget: self action: @selector(handleInteractiveGesture:)];
+    screenEdgePan.edges = UIRectEdgeLeft;
+    [viewController.view addGestureRecognizer: screenEdgePan];
+    
 }
 
 - (void)handleInteractiveGesture: (UIPanGestureRecognizer *)gesture {
-    CGPoint translation = [gesture translationInView: gesture.view];
+    CGPoint translation = [gesture translationInView: gesture.view.superview];
+    
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
         {

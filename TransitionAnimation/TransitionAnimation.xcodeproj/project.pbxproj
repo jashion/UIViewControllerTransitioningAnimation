@@ -17,6 +17,8 @@
 		1D1EE4241CDAB9DE00896447 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1EE4231CDAB9DE00896447 /* HomeViewController.m */; };
 		1D1EE4271CDAB9F200896447 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1EE4261CDAB9F200896447 /* MessageViewController.m */; };
 		1D1EE42A1CDABA0E00896447 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1EE4291CDABA0E00896447 /* SettingViewController.m */; };
+		1D299F701CDEC594003E4AAA /* PersonProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D299F6F1CDEC594003E4AAA /* PersonProfileViewController.m */; };
+		1D299F751CDF8D21003E4AAA /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D299F731CDF8D21003E4AAA /* FXBlurView.m */; };
 		1D66BE131CDDE9CD00D6B038 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE121CDDE9CD00D6B038 /* DetailTableViewCell.m */; };
 		1D66BE181CDE046200D6B038 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE171CDE046200D6B038 /* ColorUtils.m */; };
 		1D66BE1B1CDE342200D6B038 /* PopInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE1A1CDE342200D6B038 /* PopInteractiveTransition.m */; };
@@ -43,6 +45,10 @@
 		1D1EE4261CDAB9F200896447 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		1D1EE4281CDABA0E00896447 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		1D1EE4291CDABA0E00896447 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		1D299F6E1CDEC594003E4AAA /* PersonProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonProfileViewController.h; sourceTree = "<group>"; };
+		1D299F6F1CDEC594003E4AAA /* PersonProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonProfileViewController.m; sourceTree = "<group>"; };
+		1D299F731CDF8D21003E4AAA /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		1D299F741CDF8D21003E4AAA /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
 		1D66BE111CDDE9CD00D6B038 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
 		1D66BE121CDDE9CD00D6B038 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
 		1D66BE161CDE046200D6B038 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
@@ -65,6 +71,8 @@
 		1D1EE3DE1CDA0CD700896447 = {
 			isa = PBXGroup;
 			children = (
+				1D299F721CDF8CFB003E4AAA /* 3rd */,
+				1D299F711CDF2589003E4AAA /* BgImages */,
 				1D66BE151CDE044D00D6B038 /* Utils */,
 				1D66BE141CDDFCA100D6B038 /* Button */,
 				1D1EE4091CDA256100896447 /* Table */,
@@ -162,8 +170,26 @@
 			children = (
 				1D1EE4191CDA3F8800896447 /* DetailController.h */,
 				1D1EE41A1CDA3F8800896447 /* DetailController.m */,
+				1D299F6E1CDEC594003E4AAA /* PersonProfileViewController.h */,
+				1D299F6F1CDEC594003E4AAA /* PersonProfileViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1D299F711CDF2589003E4AAA /* BgImages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BgImages;
+			sourceTree = "<group>";
+		};
+		1D299F721CDF8CFB003E4AAA /* 3rd */ = {
+			isa = PBXGroup;
+			children = (
+				1D299F741CDF8D21003E4AAA /* FXBlurView.h */,
+				1D299F731CDF8D21003E4AAA /* FXBlurView.m */,
+			);
+			name = 3rd;
 			sourceTree = "<group>";
 		};
 		1D66BE141CDDFCA100D6B038 /* Button */ = {
@@ -250,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D299F701CDEC594003E4AAA /* PersonProfileViewController.m in Sources */,
 				1D1EE41B1CDA3F8800896447 /* DetailController.m in Sources */,
 				1D66BE1B1CDE342200D6B038 /* PopInteractiveTransition.m in Sources */,
 				1D1EE3EF1CDA0CD700896447 /* AppDelegate.m in Sources */,
@@ -258,6 +285,7 @@
 				1D1EE4211CDA49D000896447 /* PushTransition.m in Sources */,
 				1D1EE40E1CDA264B00896447 /* MyTableViewCell.m in Sources */,
 				1D1EE41E1CDA49BB00896447 /* PopTransition.m in Sources */,
+				1D299F751CDF8D21003E4AAA /* FXBlurView.m in Sources */,
 				1D1EE42A1CDABA0E00896447 /* SettingViewController.m in Sources */,
 				1D1EE4241CDAB9DE00896447 /* HomeViewController.m in Sources */,
 				1D1EE4271CDAB9F200896447 /* MessageViewController.m in Sources */,

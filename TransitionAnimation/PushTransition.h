@@ -10,7 +10,8 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, PushTransitionType) {
-    PushTransitionSpringType
+    PushTransitionSpringType        = 0,
+    PushTransitionCircleMaskType    = 1
 };
 
 @interface PushTransition : NSObject<UIViewControllerAnimatedTransitioning>
@@ -18,5 +19,6 @@ typedef NS_ENUM(NSInteger, PushTransitionType) {
 @property (nonatomic, assign) PushTransitionType type;
 @property (nonatomic, strong) UIView *snapView;
 @property (nonatomic, assign) CGRect snapFrame;
+@property (nonatomic, assign) NSTimeInterval duration;
 
 @end

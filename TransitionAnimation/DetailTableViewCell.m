@@ -11,7 +11,6 @@
 
 @implementation DetailTableViewCell
 {
-    UIImageView *avatarImageView;
     UILabel *nameLabel;
     UILabel *desLabel;
 }
@@ -24,10 +23,10 @@
 }
 
 - (void)buildView {
-    avatarImageView = [[UIImageView alloc] initWithFrame: CGRectMake(10, 10, 50, 50)];
-    avatarImageView.layer.cornerRadius = 25;
-    avatarImageView.layer.masksToBounds = YES;
-    [self.contentView addSubview: avatarImageView];
+    _avatarImageView = [[UIImageView alloc] initWithFrame: CGRectMake(10, 10, 50, 50)];
+    _avatarImageView.layer.cornerRadius = 25;
+    _avatarImageView.layer.masksToBounds = YES;
+    [self.contentView addSubview: _avatarImageView];
     
     CGRect rect = [UIScreen mainScreen].bounds;
     nameLabel = [[UILabel alloc] initWithFrame: CGRectMake(70, 5, rect.size.width - 80, 25)];
@@ -43,7 +42,7 @@
 }
 
 - (void)setAvatar: (UIImage *)image name: (NSString *)name des: (NSString *)des {
-    avatarImageView.image = image;
+    _avatarImageView.image = image;
     nameLabel.text = name;
     desLabel.text = des;
 }

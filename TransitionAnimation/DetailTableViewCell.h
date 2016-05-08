@@ -10,6 +10,8 @@
 
 @interface DetailTableViewCell : UITableViewCell
 
+@property (nonatomic, strong)  UIImageView *avatarImageView;
+
 - (void)setAvatar: (UIImage *)image name: (NSString *)name des: (NSString *)des;
 
 @end

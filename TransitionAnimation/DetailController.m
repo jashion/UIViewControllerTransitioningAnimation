@@ -8,11 +8,20 @@
 
 #import "DetailController.h"
 #import "DetailTableViewCell.h"
+#import "HomeViewController.h"
+#import "PersonProfileViewController.h"
+#import "PushTransition.h"
+#import "PopTransition.h"
+#import "PopInteractiveTransition.h"
 
 #define kScreenWidth  CGRectGetWidth([UIScreen mainScreen].bounds)
 #define topImageViewHeight kScreenWidth * 3 / 4
 
 @interface DetailController ()<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) PushTransition *pushTransition;
+@property (nonatomic, strong) PopTransition *popTransition;
+@property (nonatomic, strong) PopInteractiveTransition *popInteractiveTransition;
 
 @end
 
@@ -20,19 +29,27 @@
 {
     UIView *topImageContainer;
     UIImage *topImage;
+    DetailTableViewCell *selectedCell;
+    UIView *snapView;
+    CGRect snapFrame;
     NSArray *names;
     NSArray *contents;
     NSArray *avatars;
+    NSArray *titles;
 }
 
 - (instancetype)initWithTitle: (NSString *)title image: (UIImage *)image {
     if (self = [super init]) {
         self.navigationItem.title = title;
         self.hidesBottomBarWhenPushed = YES;
+        _pushTransition = [PushTransition new];
+        _popTransition = [PopTransition new];
+        _popInteractiveTransition = [PopInteractiveTransition new];
         topImage = image;
         names = @[@"morgan", @"Jashion", @"Kevin Burr", @"Sean Furr", @"Marry"];
         contents = @[@"Awesome atmosphere.I like it!Can i get your contact?", @"Love it!You are very excellent!God bless you,AMEN.", @"Great!Something like you.I want to learn!Hehe,can you teach me?", @"like it to much.I painted it as you.", @"Nice :)"];
-        avatars = @[@"Tom", @"Jashion", @"Bill", @"Jerry", @"Marry"];
+        avatars = @[@"morgan", @"Jashion", @"Kevin Burr", @"Sean Furr", @"Marry"];
+        titles = @[@"Roma Datsyuk", @"Balkan Brothers", @"Shamsuddin", @"Jakub Nespor", @"Thomas Meijer"];
     }
     return self;
 }
@@ -59,6 +76,16 @@
     [topImageContainer addSubview: self.topImageView];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear: animated];
+    
+    for (UIViewController *subVC in self.navigationController.viewControllers) {
+        if ([subVC isKindOfClass: [HomeViewController class]]) {
+            self.navigationController.delegate = (HomeViewController *)subVC;
+        }
+    }
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -78,9 +105,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 60;
-    }
+    return 60;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.1;
 }
 
@@ -104,7 +132,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    self.navigationController.delegate = self;
+    selectedCell = [tableView cellForRowAtIndexPath: indexPath];
+    selectedCell.selected = NO;
+    snapView = [selectedCell.avatarImageView snapshotViewAfterScreenUpdates: NO];
+    snapFrame = [selectedCell.avatarImageView convertRect: selectedCell.avatarImageView.bounds toView: self.view];
+    PersonProfileViewController *person = [[PersonProfileViewController alloc] initWithName: names[indexPath.row] title: titles[indexPath.row]];
+    [self.popInteractiveTransition wireToViewController: person];
+    [self.navigationController pushViewController: person animated: YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -123,6 +158,41 @@
            self.topImageView.frame = topImageContainer.bounds;
        }];
     }
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                            animationControllerForOperation:(UINavigationControllerOperation)operation
+                                                         fromViewController:(UIViewController *)fromVC
+                                                           toViewController:(UIViewController *)toVC  {
+    
+    
+    if (operation == UINavigationControllerOperationPush) {
+        self.pushTransition.type = PushTransitionCircleMaskType;
+        self.pushTransition.snapView = snapView;
+        self.pushTransition.snapFrame = snapFrame;
+        self.pushTransition.duration = 0.4;
+        return self.pushTransition;
+    } else if (operation == UINavigationControllerOperationPop) {
+        self.popTransition.type = PopTransitionCircleMaskType;
+        self.popTransition.finalView = snapView;
+        self.popTransition.finalFrame = snapFrame;
+        self.popTransition.duration = 0.4;
+        self.popTransition.completed = YES;
+        return  self.popTransition;
+    } else {
+        return nil;
+    }
+}
+
+- (nullable id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
+                                   interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController {
+    self.popInteractiveTransition.animatedTransition = animationController;
+    return self.popInteractiveTransition.interacting ? self.popInteractiveTransition : nil;
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 }
 
 #pragma mark - Private Method

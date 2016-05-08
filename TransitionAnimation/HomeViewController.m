@@ -14,7 +14,7 @@
 #import "ColorUtils.h"
 #import "PopInteractiveTransition.h"
 
-@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
+@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) PushTransition *pushTransition;
 @property (nonatomic, strong) PopTransition *popTransition;
@@ -32,7 +32,7 @@
 
 - (instancetype)init {
     if(self = [super init]) {
-        items = @[@"Book", @"Chair", @"Scene", @"Ice", @"Seed"];
+        items = @[@"Castle", @"Web", @"Sun", @"Chart", @"Signal"];
         self.navigationItem.title = @"Home";
         _pushTransition = [PushTransition new];
         _popTransition = [PopTransition new];
@@ -51,8 +51,8 @@
     [self.view addSubview: self.myTable];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear: animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     self.navigationController.delegate = self;
 }
@@ -95,11 +95,14 @@
         self.pushTransition.type = PushTransitionSpringType;
         self.pushTransition.snapView = snapView;
         self.pushTransition.snapFrame = snapFrame;
+        self.pushTransition.duration = 0.4;
         return self.pushTransition;
     } else if (operation == UINavigationControllerOperationPop) {
+        self.popTransition.type = PopTransitionSpringType;
         self.popTransition.finalFrame = snapFrame;
         self.popTransition.selectedCell = selectedCell;
         self.popTransition.completed = YES;
+        self.popTransition.duration = 0.5;
         return self.popTransition;
     } else {
         return nil;
