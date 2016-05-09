@@ -36,7 +36,6 @@
         snapView.frame = [fromVC.topImageView convertRect: fromVC.topImageView.bounds toView: toView];
         [container addSubview: snapView];
         
-        UIViewController *toVC = [transitionContext viewControllerForKey: UITransitionContextToViewControllerKey];
         toView.alpha = 0;
         self.selectedCell.contentView.hidden = YES;
         [UIView animateWithDuration: self.duration delay: 0.0 usingSpringWithDamping: 0.9 initialSpringVelocity: 1.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{

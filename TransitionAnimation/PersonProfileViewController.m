@@ -26,8 +26,9 @@
     UITableView *personTableView;
     NSArray *photos;
     UIView *topImageContainer;
+    UIImage *topImage;
     UIImageView *topImageView;
-    UIView *effectView;
+    UIImageView *effectView;
     UIView *desContentView;
 }
 
@@ -46,6 +47,13 @@
     
     self.view.backgroundColor = [UIColor colorWithWhite: 0.8 alpha: 1];
     
+    UIButton *backButton = [UIButton buttonWithType: UIButtonTypeSystem];
+    backButton.frame = CGRectMake(0, 0, 40, 44);
+    [backButton setImage: [UIImage imageNamed:@"BackIcon"] forState: UIControlStateNormal];
+    [backButton setImageEdgeInsets: UIEdgeInsetsMake(0, - 30, 0, 0)];
+    [backButton addTarget: self action: @selector(back) forControlEvents: UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: backButton];
+    
     personTableView = [[UITableView alloc] initWithFrame: [UIScreen mainScreen].bounds style: UITableViewStyleGrouped];
     personTableView.dataSource = self;
     personTableView.delegate = self;
@@ -58,14 +66,14 @@
     topImageContainer.clipsToBounds = YES;
     [personTableView addSubview: topImageContainer];
     
-    topImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"Sun"]];
+    topImage = [UIImage imageNamed:@"Sun"];
+    topImageView = [[UIImageView alloc] initWithImage: topImage];
     topImageView.frame = CGRectMake(0,  - 64, kScreenWidth, topImageViewHeight);
     [topImageContainer addSubview: topImageView];
     
-    effectView = [[UIView alloc] init];
-    effectView.frame = topImageContainer.bounds;
-    effectView.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.55];
-    [topImageContainer addSubview: effectView];
+    effectView = [[UIImageView alloc] initWithImage: [topImage blurredImageWithRadius: 5 iterations: 10 tintColor: [UIColor blackColor]]];
+    effectView.frame = CGRectMake(0,  0, kScreenWidth, topImageViewHeight);
+    [topImageView addSubview: effectView];
     
     desContentView = [[UIView alloc] initWithFrame: topImageContainer.frame];
     [personTableView addSubview: desContentView];
@@ -169,18 +177,31 @@
     if (offset <= 0 && offset >= - 96) {
         topImageContainer.frame = CGRectMake(0, - topHeight + offset, kScreenWidth, topHeight - offset);
         topImageView.frame = CGRectMake(0, - 64 - offset * 2 / 3, kScreenWidth, topImageViewHeight);
+        desContentView.alpha = 1 + offset / 96;
+        effectView.alpha = 1 + offset / 96;
     } else if(offset < - 96){
         CGFloat offsetY = - offset - 96;
         topImageContainer.bounds = CGRectMake(0, 0, kScreenWidth + offsetY, topImageViewHeight + offsetY);
         topImageContainer.center = CGPointMake(kScreenWidth / 2, - topImageContainer.bounds.size.height / 2);
         topImageView.frame = CGRectMake(0, 0, topImageContainer.bounds.size.width, topImageContainer.bounds.size.height);
+        desContentView.alpha = 0;
+        effectView.alpha = 0;
     } else {
+        desContentView.alpha = offset > 90 ? 0 : 1 - offset / 90;
         [UIView animateWithDuration: 0.1 animations:^{
             topImageContainer.frame = CGRectMake(0, - topHeight, kScreenWidth, topHeight);
             topImageView.frame = CGRectMake(0, - 64, kScreenWidth, topImageViewHeight);
+            effectView.alpha = 1;
         }];
     }
-    effectView.frame = topImageContainer.bounds;
+    effectView.frame = topImageView.bounds;
+    desContentView.center = CGPointMake(kScreenWidth / 2, - topHeight / 2 + offset);
+}
+
+#pragma mark - Event Response
+
+- (void)back {
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 #pragma mark - Private Method

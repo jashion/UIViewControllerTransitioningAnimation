@@ -46,16 +46,23 @@
         _popTransition = [PopTransition new];
         _popInteractiveTransition = [PopInteractiveTransition new];
         topImage = image;
-        names = @[@"morgan", @"Jashion", @"Kevin Burr", @"Sean Furr", @"Marry"];
-        contents = @[@"Awesome atmosphere.I like it!Can i get your contact?", @"Love it!You are very excellent!God bless you,AMEN.", @"Great!Something like you.I want to learn!Hehe,can you teach me?", @"like it to much.I painted it as you.", @"Nice :)"];
-        avatars = @[@"morgan", @"Jashion", @"Kevin Burr", @"Sean Furr", @"Marry"];
-        titles = @[@"Roma Datsyuk", @"Balkan Brothers", @"Shamsuddin", @"Jakub Nespor", @"Thomas Meijer"];
+        names = @[@"morgan", @"Jashion", @"Kevin Burr", @"Sean Furr", @"Marry", @"Stan", @"Sulian", @"Sheet"];
+        contents = @[@"Awesome atmosphere.I like it!Can i get your contact?", @"Love it!You are very excellent!God bless you,AMEN.", @"Great!Something like you.I want to learn!Hehe,can you teach me?", @"like it to much.I painted it as you.", @"Nice :)", @"Sweet Lord.This is gorgeous,great job guys!", @"Supernice! Can i have it printed on poster please? :)", @"Whoa!This is amazing."];
+        avatars = @[@"morgan", @"Jashion", @"Kevin Burr", @"Sean Furr", @"Marry", @"Stan", @"Sulian", @"Sheet"];
+        titles = @[@"Roma Datsyuk", @"Balkan Brothers", @"Shamsuddin", @"Jakub Nespor", @"Thomas Meijer", @"Stan", @"Sulian", @"Sheet"];
     }
     return self;
 }
 
 - (void)loadView {
     [super loadView];
+    
+    UIButton *backButton = [UIButton buttonWithType: UIButtonTypeSystem];
+    backButton.frame = CGRectMake(0, 0, 40, 44);
+    [backButton setImage: [UIImage imageNamed:@"BackIcon"] forState: UIControlStateNormal];
+    [backButton setImageEdgeInsets: UIEdgeInsetsMake(0, - 30, 0, 0)];
+    [backButton addTarget: self action: @selector(back) forControlEvents: UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: backButton];
     
     self.detailTableView = [[UITableView alloc] initWithFrame: [UIScreen mainScreen].bounds style: UITableViewStyleGrouped];
     self.detailTableView.dataSource = self;
@@ -192,7 +199,10 @@
     return self.popInteractiveTransition.interacting ? self.popInteractiveTransition : nil;
 }
 
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+#pragma mark - Event Response
+
+- (void)back {
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 #pragma mark - Private Method
