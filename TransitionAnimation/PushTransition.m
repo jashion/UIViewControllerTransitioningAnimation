@@ -90,6 +90,7 @@
             self.snapView.transform = CGAffineTransformIdentity;
             self.snapView.alpha = 1;
         }];
+    } else if (self.type == PresentTransitionFromBottomType) {
     }
 }
 

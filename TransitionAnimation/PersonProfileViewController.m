@@ -7,15 +7,21 @@
 //
 
 #import "PersonProfileViewController.h"
+#import "PhotoCircleController.h"
 #import "MyTableViewCell.h"
 #import "ColorUtils.h"
 #import "FXBlurView.h"
+#import "PushTransition.h"
+#import "PopTransition.h"
 
 #define kScreenWidth  CGRectGetWidth([UIScreen mainScreen].bounds)
 #define topImageViewHeight kScreenWidth * 3 / 4
 #define topHeight (topImageViewHeight - 96)
 
-@interface PersonProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface PersonProfileViewController ()<UITableViewDataSource, UITableViewDelegate, handleDismissControllerDelegate, UIViewControllerTransitioningDelegate>
+
+@property (nonatomic, strong) PushTransition *pushTransition;
+@property (nonatomic, strong) PopTransition *popTransition;
 
 @end
 
@@ -23,21 +29,24 @@
 {
     NSString *personName;
     NSString *personTitle;
+    UIImage *personImage;
     UITableView *personTableView;
     NSArray *photos;
     UIView *topImageContainer;
-    UIImage *topImage;
     UIImageView *topImageView;
     UIImageView *effectView;
     UIView *desContentView;
 }
 
-- (instancetype)initWithName: (NSString *)name title: (NSString *)title{
+- (instancetype)initWithName: (NSString *)name title: (NSString *)title image: (UIImage *)image{
     if (self = [super init]) {
         personName = name;
         personTitle = title;
+        personImage = image;
         self.navigationItem.title = name;
-        photos = @[@"Web", @"PeaceMidNight", @"Signal", @"Castle", @"Sun", @"Chart", @"Animal"];
+        photos = @[@"Castle", @"PeaceMidNight", @"Signal", @"Web", @"Sun", @"Chart", @"Animal"];
+        _pushTransition = [PushTransition new];
+        _popTransition = [PopTransition new];
     }
     return self;
 }
@@ -66,12 +75,11 @@
     topImageContainer.clipsToBounds = YES;
     [personTableView addSubview: topImageContainer];
     
-    topImage = [UIImage imageNamed:@"Sun"];
-    topImageView = [[UIImageView alloc] initWithImage: topImage];
+    topImageView = [[UIImageView alloc] initWithImage: personImage];
     topImageView.frame = CGRectMake(0,  - 64, kScreenWidth, topImageViewHeight);
     [topImageContainer addSubview: topImageView];
     
-    effectView = [[UIImageView alloc] initWithImage: [topImage blurredImageWithRadius: 5 iterations: 10 tintColor: [UIColor blackColor]]];
+    effectView = [[UIImageView alloc] initWithImage: [personImage blurredImageWithRadius: 5 iterations: 10 tintColor: [UIColor blackColor]]];
     effectView.frame = CGRectMake(0,  0, kScreenWidth, topImageViewHeight);
     [topImageView addSubview: effectView];
     
@@ -168,6 +176,25 @@
     avatarImageView.layer.borderWidth = 3;
     [buttonsContainer addSubview: avatarImageView];
     return buttonsContainer;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PhotoCircleController *photoCircleController = [[PhotoCircleController alloc] initWithImages: photos currentImageIndex: indexPath.row];
+    photoCircleController.delegate = self;
+    photoCircleController.transitioningDelegate = self;
+    [self presentViewController: photoCircleController animated: YES completion: nil];
+}
+
+#pragma mark - handleDismissControllerDelegate
+
+- (void)dismissController:(PhotoCircleController *)controller {
+    [controller dismissViewControllerAnimated: YES completion: nil];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return nil;
 }
 
 #pragma mark - UIScrollViewDelegate

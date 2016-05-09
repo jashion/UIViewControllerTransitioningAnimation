@@ -11,7 +11,8 @@
 
 typedef NS_ENUM(NSInteger, PushTransitionType) {
     PushTransitionSpringType        = 0,
-    PushTransitionCircleMaskType    = 1
+    PushTransitionCircleMaskType    = 1,
+    PresentTransitionFromBottomType = 2
 };
 
 @interface PushTransition : NSObject<UIViewControllerAnimatedTransitioning>

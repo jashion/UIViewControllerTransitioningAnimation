@@ -144,7 +144,7 @@
     selectedCell.selected = NO;
     snapView = [selectedCell.avatarImageView snapshotViewAfterScreenUpdates: NO];
     snapFrame = [selectedCell.avatarImageView convertRect: selectedCell.avatarImageView.bounds toView: self.view];
-    PersonProfileViewController *person = [[PersonProfileViewController alloc] initWithName: names[indexPath.row] title: titles[indexPath.row]];
+    PersonProfileViewController *person = [[PersonProfileViewController alloc] initWithName: names[indexPath.row] title: titles[indexPath.row] image: topImage];
     [self.popInteractiveTransition wireToViewController: person];
     [self.navigationController pushViewController: person animated: YES];
 }

@@ -10,6 +10,6 @@
 
 @interface PersonProfileViewController : UIViewController
 
-- (instancetype)initWithName: (NSString *)name title: (NSString *)title;
+- (instancetype)initWithName: (NSString *)name title: (NSString *)title image: (UIImage *)image;
 
 @end
