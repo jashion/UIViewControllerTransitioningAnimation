@@ -22,6 +22,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame: [UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [self createTabController];
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+
+- (UITabBarController *)createTabController {
     HomeViewController *home = [[HomeViewController alloc] init];
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController: home];
     homeNav.navigationBar.tintColor = [ColorUtils mainColor];
@@ -35,7 +42,7 @@
     messageNav.tabBarItem.title = @"Message";
     messageNav.tabBarItem.image = [UIImage imageNamed:@"MessageUnSelect"];
     messageNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"MessageSelect"] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
-        
+    
     SettingViewController *setting = [[SettingViewController alloc] init];
     UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController: setting];
     settingNav.navigationBar.tintColor = [ColorUtils mainColor];
@@ -46,10 +53,7 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[homeNav, messageNav, settingNav];
     tabBarController.tabBar.tintColor = [ColorUtils mainColor];
-    self.window.rootViewController = tabBarController;
-    
-    [self.window makeKeyAndVisible];
-    return YES;
+    return tabBarController;
 }
 
 @end
