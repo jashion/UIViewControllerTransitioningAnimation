@@ -160,7 +160,7 @@
     
     UILabel *title = [[UILabel alloc] initWithFrame: CGRectMake(10, photoContentViewWidth * 3 / 4 + 30, photoContentViewWidth - 20, 50)];
     title.font = [UIFont systemFontOfSize: 20];
-    title.textColor = [UIColor colorWithWhite:0.400 alpha:1.000];
+    title.textColor = [UIColor colorWithWhite:0.200 alpha:1.000];
     title.numberOfLines = 0;
     title.textAlignment = NSTextAlignmentCenter;
     title.text = @"每把枪，都印刻着一段记忆难以释怀！";
@@ -183,7 +183,7 @@
     button.titleLabel.font = [UIFont boldSystemFontOfSize: 16];
     button.titleEdgeInsets = UIEdgeInsetsMake(26, 0, 0, 0);
     [button setTitle: title forState: UIControlStateNormal];
-    [button setTitleColor: [UIColor blackColor] forState: UIControlStateNormal];
+    [button setTitleColor: [UIColor colorWithWhite:0.200 alpha:1.000] forState: UIControlStateNormal];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     imageView.contentMode = UIViewContentModeCenter;
     imageView.bounds = CGRectMake(0, 0, frame.size.height / 2, frame.size.height / 2);

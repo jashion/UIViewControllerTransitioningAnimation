@@ -62,16 +62,9 @@
     return tabBarController;
 }
 
-- (nullable id <UIViewControllerInteractiveTransitioning>)tabBarController:(UITabBarController *)tabBarController
-                               interactionControllerForAnimationController: (id <UIViewControllerAnimatedTransitioning>)animationController {
-    
-    return nil;
-}
-
 - (nullable id <UIViewControllerAnimatedTransitioning>)tabBarController:(UITabBarController *)tabBarController
                      animationControllerForTransitionFromViewController:(UIViewController *)fromVC
                                                        toViewController:(UIViewController *)toVC  {
-    
     return self.transition;
 }
 
