@@ -56,7 +56,7 @@
         CGRect rect = fromView.bounds;
         CGFloat radius;
         
-        if (initalPoint.x > rect.size.width / 2 && initalPoint.y > rect.size.height / 2) {
+        if (initalPoint.x >= rect.size.width / 2 && initalPoint.y >= rect.size.height / 2) {
             radius = sqrtf(powf(initalPoint.x, 2) + powf(initalPoint.y, 2));
         } else if (initalPoint.x > rect.size.width / 2 && initalPoint.y < rect.size.height / 2) {
             radius = sqrtf(powf(initalPoint.x, 2) + powf(rect.size.height - initalPoint.y, 2));
@@ -69,9 +69,6 @@
         
         UIBezierPath *initalPath = [UIBezierPath bezierPathWithArcCenter: initalPoint radius: radius startAngle: 0 endAngle: M_PI * 2 clockwise: YES];
         UIBezierPath *finalPath = [UIBezierPath bezierPathWithOvalInRect: self.finalFrame];
-        
-        CAShapeLayer *initalMask = [CAShapeLayer layer];
-        initalMask.path = initalPath.CGPath;
         
         CAShapeLayer *finalMask = [CAShapeLayer layer];
         finalMask.path = finalPath.CGPath;

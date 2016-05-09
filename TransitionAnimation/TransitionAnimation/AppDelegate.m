@@ -12,8 +12,12 @@
 #import "SettingViewController.h"
 #import "objc/runtime.h"
 #import "ColorUtils.h"
+#import "TabTransition.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UITabBarControllerDelegate>
+
+@property (nonatomic, assign) CGPoint tapPoint;
+@property (nonatomic, strong) TabTransition *transition;
 
 @end
 
@@ -25,6 +29,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [self createTabController];
     [self.window makeKeyAndVisible];
+    self.transition = [TabTransition new];
     return YES;
 }
 
@@ -53,7 +58,21 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[homeNav, messageNav, settingNav];
     tabBarController.tabBar.tintColor = [ColorUtils mainColor];
+    tabBarController.delegate = self;
     return tabBarController;
+}
+
+- (nullable id <UIViewControllerInteractiveTransitioning>)tabBarController:(UITabBarController *)tabBarController
+                               interactionControllerForAnimationController: (id <UIViewControllerAnimatedTransitioning>)animationController {
+    
+    return nil;
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)tabBarController:(UITabBarController *)tabBarController
+                     animationControllerForTransitionFromViewController:(UIViewController *)fromVC
+                                                       toViewController:(UIViewController *)toVC  {
+    
+    return self.transition;
 }
 
 @end
