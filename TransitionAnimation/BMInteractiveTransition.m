@@ -1,39 +1,43 @@
 //
-//  PopInteractiveTransition.m
+//  BMInteractiveTransition.m
 //  TransitionAnimation
 //
-//  Created by jashion on 16/5/7.
+//  Created by jashion on 16/5/11.
 //  Copyright © 2016年 BMu. All rights reserved.
 //
 
-#import "PopInteractiveTransition.h"
+#import "BMInteractiveTransition.h"
 
-@implementation PopInteractiveTransition
+@implementation BMInteractiveTransition
 {
     BOOL shouldComplete;
-    UIViewController *toVC;
+    UIViewController *controller;
 }
 
 - (void)wireToViewController: (UIViewController *)viewController {
-    toVC = viewController;
+    controller = viewController;
     UIScreenEdgePanGestureRecognizer *screenEdgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget: self action: @selector(handleInteractiveGesture:)];
     screenEdgePan.edges = UIRectEdgeLeft;
     [viewController.view addGestureRecognizer: screenEdgePan];
-    
 }
 
 - (void)handleInteractiveGesture: (UIPanGestureRecognizer *)gesture {
     CGPoint translation = [gesture translationInView: gesture.view.superview];
     
-    NSLog(@"interactive");
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
         {
             self.interacting = YES;
-            [toVC.navigationController popViewControllerAnimated: YES];
+            if (self.operation == BMInteractiveTransitionNavigationType) {
+                [controller.navigationController popViewControllerAnimated: YES];
+            } else if (self.operation == BMInteractiveTransitionTabControllerType) {
+            
+            } else {
+            
+            }
             break;
         }
-        
+            
         case UIGestureRecognizerStateChanged:
         {
             CGFloat fraction = translation.x / (CGRectGetWidth([UIScreen mainScreen].bounds) / 2);
@@ -42,18 +46,12 @@
             [self updateInteractiveTransition: fraction];
             break;
         }
-        
+            
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:
         {
             self.interacting = NO;
-            if (shouldComplete) {
-//                self.animatedTransition.completed = YES;
-                [self finishInteractiveTransition];
-            } else {
-//                self.animatedTransition.completed = NO;
-                [self cancelInteractiveTransition];
-            }
+            shouldComplete? [self finishInteractiveTransition] : [self cancelInteractiveTransition];
             break;
         }
             

@@ -21,6 +21,8 @@
 		1D299F751CDF8D21003E4AAA /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D299F731CDF8D21003E4AAA /* FXBlurView.m */; };
 		1D299F781CE022CB003E4AAA /* PhotoCircleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D299F771CE022CB003E4AAA /* PhotoCircleController.m */; };
 		1D299F7B1CE0A6B9003E4AAA /* TabTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D299F7A1CE0A6B9003E4AAA /* TabTransition.m */; };
+		1D30FC681CE3769300AF6B26 /* BMInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D30FC671CE3769300AF6B26 /* BMInteractiveTransition.m */; };
+		1D5FCED01CE21C0C00D5B723 /* BMAnimateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5FCECF1CE21C0C00D5B723 /* BMAnimateTransition.m */; };
 		1D66BE131CDDE9CD00D6B038 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE121CDDE9CD00D6B038 /* DetailTableViewCell.m */; };
 		1D66BE181CDE046200D6B038 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE171CDE046200D6B038 /* ColorUtils.m */; };
 		1D66BE1B1CDE342200D6B038 /* PopInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE1A1CDE342200D6B038 /* PopInteractiveTransition.m */; };
@@ -55,6 +57,10 @@
 		1D299F771CE022CB003E4AAA /* PhotoCircleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCircleController.m; sourceTree = "<group>"; };
 		1D299F791CE0A6B9003E4AAA /* TabTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabTransition.h; sourceTree = "<group>"; };
 		1D299F7A1CE0A6B9003E4AAA /* TabTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabTransition.m; sourceTree = "<group>"; };
+		1D30FC661CE3769300AF6B26 /* BMInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMInteractiveTransition.h; sourceTree = "<group>"; };
+		1D30FC671CE3769300AF6B26 /* BMInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMInteractiveTransition.m; sourceTree = "<group>"; };
+		1D5FCECE1CE21C0C00D5B723 /* BMAnimateTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAnimateTransition.h; sourceTree = "<group>"; };
+		1D5FCECF1CE21C0C00D5B723 /* BMAnimateTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAnimateTransition.m; sourceTree = "<group>"; };
 		1D66BE111CDDE9CD00D6B038 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
 		1D66BE121CDDE9CD00D6B038 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
 		1D66BE161CDE046200D6B038 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
@@ -144,6 +150,10 @@
 				1D66BE1A1CDE342200D6B038 /* PopInteractiveTransition.m */,
 				1D299F791CE0A6B9003E4AAA /* TabTransition.h */,
 				1D299F7A1CE0A6B9003E4AAA /* TabTransition.m */,
+				1D5FCECE1CE21C0C00D5B723 /* BMAnimateTransition.h */,
+				1D5FCECF1CE21C0C00D5B723 /* BMAnimateTransition.m */,
+				1D30FC661CE3769300AF6B26 /* BMInteractiveTransition.h */,
+				1D30FC671CE3769300AF6B26 /* BMInteractiveTransition.m */,
 			);
 			name = Transition;
 			sourceTree = "<group>";
@@ -290,9 +300,11 @@
 				1D1EE41B1CDA3F8800896447 /* DetailController.m in Sources */,
 				1D66BE1B1CDE342200D6B038 /* PopInteractiveTransition.m in Sources */,
 				1D1EE3EF1CDA0CD700896447 /* AppDelegate.m in Sources */,
+				1D5FCED01CE21C0C00D5B723 /* BMAnimateTransition.m in Sources */,
 				1D66BE181CDE046200D6B038 /* ColorUtils.m in Sources */,
 				1D66BE131CDDE9CD00D6B038 /* DetailTableViewCell.m in Sources */,
 				1D1EE4211CDA49D000896447 /* PushTransition.m in Sources */,
+				1D30FC681CE3769300AF6B26 /* BMInteractiveTransition.m in Sources */,
 				1D1EE40E1CDA264B00896447 /* MyTableViewCell.m in Sources */,
 				1D1EE41E1CDA49BB00896447 /* PopTransition.m in Sources */,
 				1D299F751CDF8D21003E4AAA /* FXBlurView.m in Sources */,

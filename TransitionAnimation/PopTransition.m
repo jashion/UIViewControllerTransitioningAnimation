@@ -28,6 +28,7 @@
     UIView *toView = [transitionContext viewForKey: UITransitionContextToViewKey];
     UIView *fromView = [transitionContext viewForKey: UITransitionContextFromViewKey];
     
+    NSLog(@"PopAnimating");
     if (self.type == PopTransitionSpringType) {
         [container addSubview: toView];
         DetailController *fromVC = (DetailController *)[transitionContext viewControllerForKey: UITransitionContextFromViewControllerKey];

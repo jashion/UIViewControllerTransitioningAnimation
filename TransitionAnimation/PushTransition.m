@@ -27,6 +27,7 @@
     UIView *toView = [transitionContext viewForKey: UITransitionContextToViewKey];
     UIView *fromView = [transitionContext viewForKey: UITransitionContextFromViewKey];
     
+    NSLog(@"PushAnimating");
     if (self.type == PushTransitionSpringType) {
         [container addSubview: toView];
 

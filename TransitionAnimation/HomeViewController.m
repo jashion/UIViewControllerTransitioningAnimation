@@ -9,16 +9,14 @@
 #import "HomeViewController.h"
 #import "DetailController.h"
 #import "MyTableViewCell.h"
-#import "PushTransition.h"
-#import "PopTransition.h"
 #import "ColorUtils.h"
-#import "PopInteractiveTransition.h"
+#import "BMAnimateTransition.h"
+#import "BMInteractiveTransition.h"
 
 @interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) PushTransition *pushTransition;
-@property (nonatomic, strong) PopTransition *popTransition;
-@property (nonatomic, strong) PopInteractiveTransition *interactive;
+@property (nonatomic, strong) BMAnimateTransition *transition;
+@property (nonatomic, strong) BMInteractiveTransition *interactive;
 
 @end
 
@@ -34,9 +32,8 @@
     if(self = [super init]) {
         items = @[@"Castle", @"Web", @"Sun", @"Chart", @"Signal"];
         self.navigationItem.title = @"Home";
-        _pushTransition = [PushTransition new];
-        _popTransition = [PopTransition new];
-        _interactive = [PopInteractiveTransition new];
+        _transition = [BMAnimateTransition new];
+        _interactive = [BMInteractiveTransition new];
     }
     return self;
 }
@@ -92,18 +89,23 @@
                                                            toViewController:(UIViewController *)toVC {
     
     if (operation == UINavigationControllerOperationPush) {
-        self.pushTransition.type = PushTransitionSpringType;
-        self.pushTransition.snapView = snapView;
-        self.pushTransition.snapFrame = snapFrame;
-        self.pushTransition.duration = 0.4;
-        return self.pushTransition;
+        DetailController *detail = (DetailController *)toVC;
+        self.transition.operation = BMAnimateTransitionSnapViewTransformPush;
+        self.transition.snapView = snapView;
+        self.transition.initalView = selectedCell;
+        self.transition.initalFrame = snapFrame;
+        self.transition.finalView = detail.topImageView;
+        self.transition.finalFrame = CGRectMake(0, 64, snapFrame.size.width, snapFrame.size.height);
+        return self.transition;
     } else if (operation == UINavigationControllerOperationPop) {
-        self.popTransition.type = PopTransitionSpringType;
-        self.popTransition.finalFrame = snapFrame;
-        self.popTransition.selectedCell = selectedCell;
-        self.popTransition.completed = YES;
-        self.popTransition.duration = 0.5;
-        return self.popTransition;
+        DetailController *detail = (DetailController *)fromVC;
+        self.transition.operation = BMAnimateTransitionSnapViewTransformPop;
+        self.transition.snapView = [detail.topImageView snapshotViewAfterScreenUpdates: NO];
+        self.transition.initalView = detail.topImageView;
+        self.transition.initalFrame = [detail.topImageView convertRect: detail.topImageView.bounds toView: detail.view];
+        self.transition.finalView = selectedCell;
+        self.transition.finalFrame = snapFrame;
+        return self.transition;
     } else {
         return nil;
     }
@@ -113,7 +115,7 @@
                                    interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController {
     
     
-    self.interactive.animatedTransition = animationController;
+    self.interactive.operation = BMInteractiveTransitionNavigationType;
     return self.interactive.interacting ? self.interactive : nil;
 }
 
