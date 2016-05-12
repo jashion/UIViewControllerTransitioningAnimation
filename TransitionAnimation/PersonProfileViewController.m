@@ -11,17 +11,12 @@
 #import "MyTableViewCell.h"
 #import "ColorUtils.h"
 #import "FXBlurView.h"
-#import "PushTransition.h"
-#import "PopTransition.h"
 
 #define kScreenWidth  CGRectGetWidth([UIScreen mainScreen].bounds)
 #define topImageViewHeight kScreenWidth * 3 / 4
 #define topHeight (topImageViewHeight - 96)
 
 @interface PersonProfileViewController ()<UITableViewDataSource, UITableViewDelegate, handleDismissControllerDelegate, UIViewControllerTransitioningDelegate>
-
-@property (nonatomic, strong) PushTransition *pushTransition;
-@property (nonatomic, strong) PopTransition *popTransition;
 
 @end
 
@@ -45,8 +40,6 @@
         personImage = image;
         self.navigationItem.title = name;
         photos = @[@"Castle", @"PeaceMidNight", @"Signal", @"Web", @"Sun", @"Chart", @"Animal"];
-        _pushTransition = [PushTransition new];
-        _popTransition = [PopTransition new];
     }
     return self;
 }

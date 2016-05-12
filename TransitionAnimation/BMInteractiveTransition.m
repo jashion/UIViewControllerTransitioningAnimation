@@ -12,12 +12,18 @@
 {
     BOOL shouldComplete;
     UIViewController *controller;
+    BMInteractiveTransitionType operationType;
 }
 
-- (void)wireToViewController: (UIViewController *)viewController {
+- (void)wireToViewController: (UIViewController *)viewController operation: (BMInteractiveTransitionType)operation{
     controller = viewController;
+    operationType = operation;
     UIScreenEdgePanGestureRecognizer *screenEdgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget: self action: @selector(handleInteractiveGesture:)];
-    screenEdgePan.edges = UIRectEdgeLeft;
+    if (operation == BMInteractiveTransitionTabControllerType) {
+        screenEdgePan.edges = UIRectEdgeRight;
+    } else {
+        screenEdgePan.edges = UIRectEdgeLeft;
+    }
     [viewController.view addGestureRecognizer: screenEdgePan];
 }
 
@@ -28,12 +34,11 @@
         case UIGestureRecognizerStateBegan:
         {
             self.interacting = YES;
-            if (self.operation == BMInteractiveTransitionNavigationType) {
+            if (operationType == BMInteractiveTransitionNavigationType) {
                 [controller.navigationController popViewControllerAnimated: YES];
-            } else if (self.operation == BMInteractiveTransitionTabControllerType) {
-            
+            } else if (operationType == BMInteractiveTransitionTabControllerType) {
             } else {
-            
+                [controller dismissViewControllerAnimated: YES completion: nil];
             }
             break;
         }
@@ -42,7 +47,7 @@
         {
             CGFloat fraction = translation.x / (CGRectGetWidth([UIScreen mainScreen].bounds) / 2);
             fraction= fminf(fmaxf(fraction, 0.0), 1.0);
-            shouldComplete = (fraction > 0.5);
+            shouldComplete = operationType == BMInteractiveTransitionNavigationType ? (fraction > 0.15) : (fraction > 0.5);
             [self updateInteractiveTransition: fraction];
             break;
         }

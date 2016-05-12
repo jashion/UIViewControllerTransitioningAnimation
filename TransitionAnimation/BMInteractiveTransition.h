@@ -17,8 +17,7 @@ typedef NS_ENUM(NSInteger, BMInteractiveTransitionType) {
 @interface BMInteractiveTransition : UIPercentDrivenInteractiveTransition
 
 @property (nonatomic, assign) BOOL interacting;
-@property (nonatomic, assign) BMInteractiveTransitionType operation;
 
-- (void)wireToViewController: (UIViewController *)viewController;
+- (void)wireToViewController: (UIViewController *)viewController operation: (BMInteractiveTransitionType)operation;
 
 @end

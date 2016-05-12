@@ -13,7 +13,9 @@ typedef NS_ENUM(NSInteger, BMAnimateTransitionOPerationType) {
     BMAnimateTransitionCustomType                 =  0,
     BMAnimateTransitionSnapViewTransformPush      =  1,
     BMAnimateTransitionSnapViewTransformPop       =  2,
-    BMAnimateTransitionCircleLayer                =  3
+    BMAnimateTransitionCircleLayerPush            =  3,
+    BMAnimateTransitionCircleLayerPop             =  4,
+    BMAnimateTransitionTabBarCircleLayer          =  5
 };
 
 @interface BMAnimateTransition : NSObject<UIViewControllerAnimatedTransitioning>
@@ -26,11 +28,6 @@ typedef NS_ENUM(NSInteger, BMAnimateTransitionOPerationType) {
  */
 
 @property (nonatomic, strong) UIView *snapView;
-
-/**
- *  BMAnimateTransitionSnapViewTransformPushOrPopType
- */
-
 @property (nonatomic, strong) UIView *initalView;
 @property (nonatomic, assign) CGRect initalFrame;
 @property (nonatomic, strong) UIView *finalView;

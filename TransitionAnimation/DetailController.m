@@ -10,18 +10,16 @@
 #import "DetailTableViewCell.h"
 #import "HomeViewController.h"
 #import "PersonProfileViewController.h"
-#import "PushTransition.h"
-#import "PopTransition.h"
-#import "PopInteractiveTransition.h"
+#import "BMAnimateTransition.h"
+#import "BMInteractiveTransition.h"
 
 #define kScreenWidth  CGRectGetWidth([UIScreen mainScreen].bounds)
 #define topImageViewHeight kScreenWidth * 3 / 4
 
 @interface DetailController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) PushTransition *pushTransition;
-@property (nonatomic, strong) PopTransition *popTransition;
-@property (nonatomic, strong) PopInteractiveTransition *popInteractiveTransition;
+@property (nonatomic, strong) BMAnimateTransition *transition;
+@property (nonatomic, strong) BMInteractiveTransition *interactive;
 
 @end
 
@@ -41,10 +39,9 @@
 - (instancetype)initWithTitle: (NSString *)title image: (UIImage *)image {
     if (self = [super init]) {
         self.navigationItem.title = title;
-        self.hidesBottomBarWhenPushed = YES;
-        _pushTransition = [PushTransition new];
-        _popTransition = [PopTransition new];
-        _popInteractiveTransition = [PopInteractiveTransition new];
+        self.hidesBottomBarWhenPushed = YES;        
+        _transition = [BMAnimateTransition new];
+        _interactive = [BMInteractiveTransition new];
         topImage = image;
         names = @[@"morgan", @"Jashion", @"Kevin Burr", @"Sean Furr", @"Marry", @"Stan", @"Sulian", @"Sheet"];
         contents = @[@"Awesome atmosphere.I like it!Can i get your contact?", @"Love it!You are very excellent!God bless you,AMEN.", @"Great!Something like you.I want to learn!Hehe,can you teach me?", @"like it to much.I painted it as you.", @"Nice :)", @"Sweet Lord.This is gorgeous,great job guys!", @"Supernice! Can i have it printed on poster please? :)", @"Whoa!This is amazing."];
@@ -145,7 +142,7 @@
     snapView = [selectedCell.avatarImageView snapshotViewAfterScreenUpdates: NO];
     snapFrame = [selectedCell.avatarImageView convertRect: selectedCell.avatarImageView.bounds toView: self.view];
     PersonProfileViewController *person = [[PersonProfileViewController alloc] initWithName: names[indexPath.row] title: titles[indexPath.row] image: topImage];
-    [self.popInteractiveTransition wireToViewController: person];
+    [self.interactive wireToViewController: person operation: BMInteractiveTransitionNavigationType];
     [self.navigationController pushViewController: person animated: YES];
 }
 
@@ -176,18 +173,17 @@
     
     
     if (operation == UINavigationControllerOperationPush) {
-        self.pushTransition.type = PushTransitionCircleMaskType;
-        self.pushTransition.snapView = snapView;
-        self.pushTransition.snapFrame = snapFrame;
-        self.pushTransition.duration = 0.4;
-        return self.pushTransition;
+        self.transition.operation = BMAnimateTransitionCircleLayerPush;
+        self.transition.duration = 0.4;
+        self.transition.snapView = snapView;
+        self.transition.initalFrame = snapFrame;
+        return self.transition;
     } else if (operation == UINavigationControllerOperationPop) {
-        self.popTransition.type = PopTransitionCircleMaskType;
-        self.popTransition.finalView = snapView;
-        self.popTransition.finalFrame = snapFrame;
-        self.popTransition.duration = 0.4;
-        self.popTransition.completed = YES;
-        return  self.popTransition;
+        self.transition.operation = BMAnimateTransitionCircleLayerPop;
+        self.transition.duration = 0.4;
+        self.transition.finalView = snapView;
+        self.transition.finalFrame = snapFrame;
+        return self.transition;
     } else {
         return nil;
     }
@@ -195,8 +191,7 @@
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                                    interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController {
-    self.popInteractiveTransition.animatedTransition = animationController;
-    return self.popInteractiveTransition.interacting ? self.popInteractiveTransition : nil;
+    return self.interactive.interacting ? self.interactive : nil;
 }
 
 #pragma mark - Event Response

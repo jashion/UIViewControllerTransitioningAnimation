@@ -12,12 +12,14 @@
 #import "SettingViewController.h"
 #import "objc/runtime.h"
 #import "ColorUtils.h"
-#import "TabTransition.h"
+#import "BMAnimateTransition.h"
+#import "BMInteractiveTransition.h"
 
 @interface AppDelegate ()<UITabBarControllerDelegate>
 
 @property (nonatomic, assign) CGPoint tapPoint;
-@property (nonatomic, strong) TabTransition *transition;
+@property (nonatomic, strong) BMAnimateTransition *transition;
+@property (nonatomic, strong) BMInteractiveTransition *interactive;
 
 @end
 
@@ -29,7 +31,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [self createTabController];
     [self.window makeKeyAndVisible];
-    self.transition = [TabTransition new];
+    self.transition = [BMAnimateTransition new];
+    self.transition.operation = BMAnimateTransitionTabBarCircleLayer;
     return YES;
 }
 

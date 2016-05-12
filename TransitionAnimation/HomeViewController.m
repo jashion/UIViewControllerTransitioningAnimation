@@ -77,7 +77,7 @@
     snapView = [selectedCell snapshotViewAfterScreenUpdates: NO];
     snapFrame = [selectedCell convertRect: selectedCell.contentView.frame toView: self.view];
     DetailController *detail = [[DetailController alloc] initWithTitle: items[indexPath.row] image: [UIImage imageNamed: items[indexPath.row]]];
-    [self.interactive wireToViewController: detail];
+    [self.interactive wireToViewController: detail operation: BMInteractiveTransitionNavigationType];
     [self.navigationController pushViewController: detail animated: YES];
 }
 
@@ -91,6 +91,7 @@
     if (operation == UINavigationControllerOperationPush) {
         DetailController *detail = (DetailController *)toVC;
         self.transition.operation = BMAnimateTransitionSnapViewTransformPush;
+        self.transition.duration = 0.6;
         self.transition.snapView = snapView;
         self.transition.initalView = selectedCell;
         self.transition.initalFrame = snapFrame;
@@ -100,6 +101,7 @@
     } else if (operation == UINavigationControllerOperationPop) {
         DetailController *detail = (DetailController *)fromVC;
         self.transition.operation = BMAnimateTransitionSnapViewTransformPop;
+        self.transition.duration = 0.6;
         self.transition.snapView = [detail.topImageView snapshotViewAfterScreenUpdates: NO];
         self.transition.initalView = detail.topImageView;
         self.transition.initalFrame = [detail.topImageView convertRect: detail.topImageView.bounds toView: detail.view];
@@ -115,7 +117,6 @@
                                    interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController {
     
     
-    self.interactive.operation = BMInteractiveTransitionNavigationType;
     return self.interactive.interacting ? self.interactive : nil;
 }
 
