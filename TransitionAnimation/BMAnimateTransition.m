@@ -97,7 +97,7 @@
         UIBezierPath *initalPath = [UIBezierPath bezierPathWithOvalInRect: self.initalFrame];
         UIBezierPath *finalPath = [UIBezierPath bezierPathWithArcCenter: initalPoint radius: radius startAngle: 0 endAngle: M_PI * 2 clockwise: YES];
         
-        [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath];
+        [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionCircleLayerPush"];
         
         self.snapView.frame = self.initalFrame;
         [container addSubview: self.snapView];
@@ -123,7 +123,7 @@
         UIBezierPath *initalPath = [UIBezierPath bezierPathWithArcCenter: initalPoint radius: radius startAngle: 0 endAngle: M_PI * 2 clockwise: YES];
         UIBezierPath *finalPath = [UIBezierPath bezierPathWithOvalInRect: self.finalFrame];
         
-        [self circleMaskLayerAnimateWithController: fromVC fromPath: initalPath.CGPath toPath: finalPath.CGPath];
+        [self circleMaskLayerAnimateWithController: fromVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionCircleLayerPop"];
         
         self.finalView.frame = self.finalFrame;
         [container addSubview: self.finalView];
@@ -157,7 +157,7 @@
         UIBezierPath *initalPath = [UIBezierPath bezierPathWithOvalInRect: initalFrame];
         UIBezierPath *finalPath = [UIBezierPath bezierPathWithArcCenter: initalPoint radius: radius startAngle: 0 endAngle: M_PI * 2 clockwise: YES];
         
-        [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath];
+        [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionTabBarCircleLayer"];
         return;
     }
 }
@@ -187,7 +187,7 @@
     return radius;
 }
 
-- (void)circleMaskLayerAnimateWithController: (UIViewController *)controller fromPath: (CGPathRef)fromPath toPath: (CGPathRef)toPath {
+- (void)circleMaskLayerAnimateWithController: (UIViewController *)controller fromPath: (CGPathRef)fromPath toPath: (CGPathRef)toPath animationKeyName: (NSString *)keyName{
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.path = toPath;
     
@@ -197,7 +197,7 @@
     maskLayerAnimation.fromValue = (__bridge id)fromPath;
     maskLayerAnimation.toValue = (__bridge id)toPath;
     maskLayerAnimation.delegate = self;
-    [maskLayer addAnimation: maskLayerAnimation forKey: @"maskLayerAnimation"];
+    [maskLayer addAnimation: maskLayerAnimation forKey: keyName];
 }
 
 @end

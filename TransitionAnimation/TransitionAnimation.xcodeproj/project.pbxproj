@@ -22,6 +22,8 @@
 		1D5FCED01CE21C0C00D5B723 /* BMAnimateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5FCECF1CE21C0C00D5B723 /* BMAnimateTransition.m */; };
 		1D66BE131CDDE9CD00D6B038 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE121CDDE9CD00D6B038 /* DetailTableViewCell.m */; };
 		1D66BE181CDE046200D6B038 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE171CDE046200D6B038 /* ColorUtils.m */; };
+		1D7CF2D61CE7176100F188AC /* BMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CF2D51CE7176100F188AC /* BMTabBarController.m */; };
+		1D7CF2DD1CE77D9200F188AC /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CF2DC1CE77D9100F188AC /* UIImage+Tint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,10 @@
 		1D66BE121CDDE9CD00D6B038 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
 		1D66BE161CDE046200D6B038 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
 		1D66BE171CDE046200D6B038 /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorUtils.m; sourceTree = "<group>"; };
+		1D7CF2D41CE7176100F188AC /* BMTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMTabBarController.h; sourceTree = "<group>"; };
+		1D7CF2D51CE7176100F188AC /* BMTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMTabBarController.m; sourceTree = "<group>"; };
+		1D7CF2DB1CE77D9100F188AC /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tint.h"; sourceTree = "<group>"; };
+		1D7CF2DC1CE77D9100F188AC /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tint.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,7 @@
 		1D1EE3DE1CDA0CD700896447 = {
 			isa = PBXGroup;
 			children = (
+				1D7CF2DA1CE77D7500F188AC /* Categories */,
 				1D299F721CDF8CFB003E4AAA /* 3rd */,
 				1D299F711CDF2589003E4AAA /* BgImages */,
 				1D66BE151CDE044D00D6B038 /* Utils */,
@@ -123,6 +130,8 @@
 				1D1EE4261CDAB9F200896447 /* MessageViewController.m */,
 				1D1EE4281CDABA0E00896447 /* SettingViewController.h */,
 				1D1EE4291CDABA0E00896447 /* SettingViewController.m */,
+				1D7CF2D41CE7176100F188AC /* BMTabBarController.h */,
+				1D7CF2D51CE7176100F188AC /* BMTabBarController.m */,
 			);
 			name = TabControllers;
 			sourceTree = "<group>";
@@ -208,6 +217,15 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		1D7CF2DA1CE77D7500F188AC /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1D7CF2DB1CE77D9100F188AC /* UIImage+Tint.h */,
+				1D7CF2DC1CE77D9100F188AC /* UIImage+Tint.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -280,8 +298,10 @@
 				1D1EE41B1CDA3F8800896447 /* DetailController.m in Sources */,
 				1D1EE3EF1CDA0CD700896447 /* AppDelegate.m in Sources */,
 				1D5FCED01CE21C0C00D5B723 /* BMAnimateTransition.m in Sources */,
+				1D7CF2DD1CE77D9200F188AC /* UIImage+Tint.m in Sources */,
 				1D66BE181CDE046200D6B038 /* ColorUtils.m in Sources */,
 				1D66BE131CDDE9CD00D6B038 /* DetailTableViewCell.m in Sources */,
+				1D7CF2D61CE7176100F188AC /* BMTabBarController.m in Sources */,
 				1D30FC681CE3769300AF6B26 /* BMInteractiveTransition.m in Sources */,
 				1D1EE40E1CDA264B00896447 /* MyTableViewCell.m in Sources */,
 				1D299F751CDF8D21003E4AAA /* FXBlurView.m in Sources */,

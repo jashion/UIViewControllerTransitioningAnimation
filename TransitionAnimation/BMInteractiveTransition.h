@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, BMInteractiveTransitionType) {
-    BMInteractiveTransitionNavigationType        = 0,
-    BMInteractiveTransitionPresentType           = 1,
-    BMInteractiveTransitionTabControllerType     = 2
+    BMInteractiveTransitionSnapViewTransform     = 0,
+    BMInteractiveTransitionCircleLayer       = 1,
+    BMInteractiveTransitionTabBarCircleLayer     = 2
 };
 
 @interface BMInteractiveTransition : UIPercentDrivenInteractiveTransition

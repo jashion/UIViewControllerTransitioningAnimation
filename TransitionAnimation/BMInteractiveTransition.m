@@ -19,11 +19,7 @@
     controller = viewController;
     operationType = operation;
     UIScreenEdgePanGestureRecognizer *screenEdgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget: self action: @selector(handleInteractiveGesture:)];
-    if (operation == BMInteractiveTransitionTabControllerType) {
-        screenEdgePan.edges = UIRectEdgeRight;
-    } else {
-        screenEdgePan.edges = UIRectEdgeLeft;
-    }
+    screenEdgePan.edges = UIRectEdgeLeft;
     [viewController.view addGestureRecognizer: screenEdgePan];
 }
 
@@ -34,9 +30,9 @@
         case UIGestureRecognizerStateBegan:
         {
             self.interacting = YES;
-            if (operationType == BMInteractiveTransitionNavigationType) {
+            if (operationType == BMInteractiveTransitionSnapViewTransform || operationType == BMInteractiveTransitionCircleLayer) {
                 [controller.navigationController popViewControllerAnimated: YES];
-            } else if (operationType == BMInteractiveTransitionTabControllerType) {
+            } else if (operationType == BMInteractiveTransitionTabBarCircleLayer) {
             } else {
                 [controller dismissViewControllerAnimated: YES completion: nil];
             }
@@ -47,7 +43,7 @@
         {
             CGFloat fraction = translation.x / (CGRectGetWidth([UIScreen mainScreen].bounds) / 2);
             fraction= fminf(fmaxf(fraction, 0.0), 1.0);
-            shouldComplete = operationType == BMInteractiveTransitionNavigationType ? (fraction > 0.15) : (fraction > 0.5);
+            shouldComplete = operationType == BMInteractiveTransitionSnapViewTransform ? (fraction > 0.15) : (fraction > 0.5);
             [self updateInteractiveTransition: fraction];
             break;
         }

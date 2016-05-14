@@ -29,6 +29,7 @@
     NSInteger currentImageIndex;
     UIImageView *backgroundImageView;
     UIScrollView *myScrollView;
+    UIButton *cancelButton;
     UIView *frontContentView;
     UIView *currentContentView;
     UIView *nextContentView;
@@ -66,13 +67,15 @@
     myScrollView.pagingEnabled = YES;
     [self.view addSubview: myScrollView];
     
-    UIButton *cancelButton = [UIButton buttonWithType: UIButtonTypeCustom];
+    cancelButton = [UIButton buttonWithType: UIButtonTypeCustom];
     cancelButton.bounds = CGRectMake(0, 0, 36, 36);
     cancelButton.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60);
     cancelButton.backgroundColor = [UIColor blackColor];
     cancelButton.layer.cornerRadius = 18;
     cancelButton.layer.masksToBounds = YES;
     cancelButton.contentMode = UIViewContentModeScaleAspectFit;
+    cancelButton.alpha = 0;
+    cancelButton.transform = CGAffineTransformMakeScale(0.1, 0.1);
     [cancelButton setImage: [UIImage imageNamed:@"DeleteIcon"] forState: UIControlStateNormal];
     [cancelButton addTarget: self action: @selector(back) forControlEvents: UIControlEventTouchUpInside];
     [self.view addSubview: cancelButton];
@@ -101,6 +104,17 @@
     nextImageView = [self buildImageView];
     nextImageView.image = [self nextImageWithIndex: currentImageIndex];
     [nextContentView addSubview: nextImageView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear: animated];
+    
+    [UIView animateWithDuration: 0.6 delay: 0.0 usingSpringWithDamping: 0.6 initialSpringVelocity: 1.f options: UIViewAnimationOptionCurveEaseIn animations:^{
+        cancelButton.alpha = 1;
+        cancelButton.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -155,7 +169,7 @@
     photoView.backgroundColor = [UIColor whiteColor];
     photoView.center = center;
     photoView.layer.mask = maskLayer;
-    photoView.layer.cornerRadius = 82;
+    photoView.layer.cornerRadius = 80;
     photoView.clipsToBounds = YES;
     
     UILabel *title = [[UILabel alloc] initWithFrame: CGRectMake(10, photoContentViewWidth * 3 / 4 + 30, photoContentViewWidth - 20, 50)];

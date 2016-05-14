@@ -44,6 +44,7 @@
     self.myTable = [[UITableView alloc] initWithFrame: [UIScreen mainScreen].bounds style: UITableViewStylePlain];
     self.myTable.dataSource = self;
     self.myTable.delegate = self;
+    self.myTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.myTable registerClass: [MyTableViewCell class] forCellReuseIdentifier: NSStringFromClass([MyTableViewCell class])];
     [self.view addSubview: self.myTable];
 }
@@ -77,7 +78,7 @@
     snapView = [selectedCell snapshotViewAfterScreenUpdates: NO];
     snapFrame = [selectedCell convertRect: selectedCell.contentView.frame toView: self.view];
     DetailController *detail = [[DetailController alloc] initWithTitle: items[indexPath.row] image: [UIImage imageNamed: items[indexPath.row]]];
-    [self.interactive wireToViewController: detail operation: BMInteractiveTransitionNavigationType];
+    [self.interactive wireToViewController: detail operation: BMInteractiveTransitionSnapViewTransform];
     [self.navigationController pushViewController: detail animated: YES];
 }
 
