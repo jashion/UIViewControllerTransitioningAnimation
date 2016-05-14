@@ -86,7 +86,7 @@
     self.splashView.alpha = 0;
     [self.container addSubview: self.splashView];
     
-    self.maskView = [[UIImageView alloc] initWithImage: [[UIImage imageNamed:@"WhiteCircleImage"] imageWithTintColor: [UIColor colorWithRed:0.961 green:0.682 blue:0.153 alpha:1.000] blendMode: kCGBlendModeDestinationIn]];
+    self.maskView = [[UIImageView alloc] initWithImage: [[UIImage imageNamed:@"WhiteCircleImage"] imageWithTintColor: [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000] blendMode: kCGBlendModeDestinationIn]];
     self.maskView.bounds = CGRectMake(0, 0, 60, 60);
     self.maskView.center = CGPointMake(0, kRect.size.height / 2 + 100);
     self.maskView.backgroundColor = [UIColor clearColor];
@@ -182,7 +182,7 @@
         UIView *maskContentView = [[UIView alloc] init];
         maskContentView.bounds = CGRectMake(0, 0, 42, 42);
         maskContentView.center = CGPointMake(kRect.size.width / 2, kRect.size.height / 2);
-        maskContentView.backgroundColor = [UIColor colorWithRed:0.961 green:0.682 blue:0.153 alpha:1.000];
+        maskContentView.backgroundColor = [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000];
         maskContentView.layer.cornerRadius = 21;
         maskContentView.layer.masksToBounds = YES;
         [self.window addSubview: maskContentView];
