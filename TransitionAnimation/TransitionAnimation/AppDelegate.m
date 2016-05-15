@@ -27,6 +27,7 @@
 @property (nonatomic, strong) UIImageView *splashView;
 @property (nonatomic, strong) UIView *container;
 @property (nonatomic, strong) UIBezierPath *path;
+@property (nonatomic, strong) UITabBarController *tabVC;
 
 @end
 
@@ -36,7 +37,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame: [UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [self createTabController];
+    self.tabVC = [self createTabController];
+    self.window.rootViewController = self.tabVC;
     [self.window makeKeyAndVisible];
     self.transition = [BMAnimateTransition new];
     self.transition.operation = BMAnimateTransitionTabBarCircleLayer;
@@ -52,21 +54,21 @@
     homeNav.navigationBar.tintColor = [ColorUtils mainColor];
     homeNav.tabBarItem.title = @"Home";
     homeNav.tabBarItem.image = [UIImage imageNamed:@"HomeUnSelect"];
-    homeNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"HomeSelect"] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+    homeNav.tabBarItem.selectedImage = [[[UIImage imageNamed:@"HomeSelect"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
     
     MessageViewController *message = [[MessageViewController alloc] init];
     UINavigationController *messageNav = [[UINavigationController alloc] initWithRootViewController: message];
     messageNav.navigationBar.tintColor = [ColorUtils mainColor];
     messageNav.tabBarItem.title = @"Message";
     messageNav.tabBarItem.image = [UIImage imageNamed:@"MessageUnSelect"];
-    messageNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"MessageSelect"] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+    messageNav.tabBarItem.selectedImage = [[[UIImage imageNamed:@"MessageSelect"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
     
     SettingViewController *setting = [[SettingViewController alloc] init];
     UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController: setting];
     settingNav.navigationBar.tintColor = [ColorUtils mainColor];
     settingNav.tabBarItem.title = @"Setting";
     settingNav.tabBarItem.image = [UIImage imageNamed:@"SettingUnSelect"];
-    settingNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"SettingSelect"] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+    settingNav.tabBarItem.selectedImage = [[[UIImage imageNamed:@"SettingSelect"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[homeNav, messageNav, settingNav];
@@ -193,9 +195,7 @@
             self.splashView.alpha = 1;
             maskContentView.transform = CGAffineTransformMakeScale(radius / 42, radius / 42);
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration: 0.6 animations:^{
-                self.container.alpha = 0;
-            } completion:^(BOOL finished) {
+            [UIView transitionFromView: self.container toView: self.tabVC.view duration: 0.6 options: UIViewAnimationOptionTransitionFlipFromLeft completion:^(BOOL finished) {
                 [self.container removeFromSuperview];
             }];
         }];

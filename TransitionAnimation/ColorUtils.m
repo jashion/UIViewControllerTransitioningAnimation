@@ -11,7 +11,7 @@
 @implementation ColorUtils
 
 + (UIColor *)mainColor {
-    return [UIColor colorWithRed:0.400 green:0.800 blue:0.000 alpha:1.000];
+    return [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000];
 }
 
 @end

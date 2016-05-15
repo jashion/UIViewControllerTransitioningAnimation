@@ -175,6 +175,7 @@
     PhotoCircleController *photoCircleController = [[PhotoCircleController alloc] initWithImages: photos currentImageIndex: indexPath.row];
     photoCircleController.delegate = self;
     photoCircleController.transitioningDelegate = self;
+    photoCircleController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController: photoCircleController animated: YES completion: nil];
 }
 

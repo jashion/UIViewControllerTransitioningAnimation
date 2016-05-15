@@ -12,6 +12,8 @@
 #import "PersonProfileViewController.h"
 #import "BMAnimateTransition.h"
 #import "BMInteractiveTransition.h"
+#import "UIImage+Tint.h"
+#import "ColorUtils.h"
 
 #define kScreenWidth  CGRectGetWidth([UIScreen mainScreen].bounds)
 #define topImageViewHeight kScreenWidth * 3 / 4
@@ -123,13 +125,13 @@
     CGFloat buttonWidth = (buttonsContainer.frame.size.width - 1) / 3;
     CGFloat buttonHeight = buttonsContainer.frame.size.height - 0.5;
     
-    UIButton *clikedLikeButton = [self createButtonWithImage: [UIImage imageNamed:@"LikeIcon"] title: @"2048" frame: CGRectMake(0, 0.5, buttonWidth, buttonHeight)];
+    UIButton *clikedLikeButton = [self createButtonWithImage: [[UIImage imageNamed:@"LikeIcon"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn] title: @"2048" frame: CGRectMake(0, 0.5, buttonWidth, buttonHeight)];
     [buttonsContainer addSubview: clikedLikeButton];
     
-    UIButton *clickedCommentButton = [self createButtonWithImage: [UIImage imageNamed:@"CommentIcon"] title: @"10086" frame: CGRectMake(buttonWidth + 0.5, 0.5, buttonWidth, buttonHeight)];
+    UIButton *clickedCommentButton = [self createButtonWithImage: [[UIImage imageNamed:@"CommentIcon"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn] title: @"10086" frame: CGRectMake(buttonWidth + 0.5, 0.5, buttonWidth, buttonHeight)];
     [buttonsContainer addSubview: clickedCommentButton];
     
-    UIButton *clickedFollowButton = [self createButtonWithImage: [UIImage imageNamed:@"FollowIcon"] title: @"250" frame: CGRectMake(buttonWidth * 2 + 1, 0.5, buttonWidth, buttonHeight)];
+    UIButton *clickedFollowButton = [self createButtonWithImage: [[UIImage imageNamed:@"FollowIcon"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn ] title: @"250" frame: CGRectMake(buttonWidth * 2 + 1, 0.5, buttonWidth, buttonHeight)];
     [buttonsContainer addSubview: clickedFollowButton];
     
     return buttonsContainer;

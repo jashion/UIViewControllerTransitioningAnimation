@@ -8,6 +8,8 @@
 
 #import "PhotoCircleController.h"
 #import "FXBlurView.h"
+#import "ColorUtils.h"
+#import "UIImage+Tint.h"
 
 #define kScreenWidth  CGRectGetWidth([UIScreen mainScreen].bounds)
 #define kScreenHeight CGRectGetHeight([UIScreen mainScreen].bounds)
@@ -180,11 +182,11 @@
     title.text = @"每把枪，都印刻着一段记忆难以释怀！";
     [photoView addSubview: title];
     
-    UIButton *likeButton = [self createButtonWithImage: [UIImage imageNamed:@"LikeIcon"] title: @"4553" frame: CGRectMake(50, photoContentViewHeight - 100, 50, 50)];
+    UIButton *likeButton = [self createButtonWithImage: [[UIImage imageNamed:@"LikeIcon"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn] title: @"4553" frame: CGRectMake(50, photoContentViewHeight - 100, 50, 50)];
     [photoView addSubview: likeButton];
-    UIButton *commentButton = [self createButtonWithImage: [UIImage imageNamed:@"CommentIcon"] title: @"1033" frame: CGRectMake(photoContentViewWidth / 2 - 25, photoContentViewHeight - 100, 50, 50)];
+    UIButton *commentButton = [self createButtonWithImage: [[UIImage imageNamed:@"CommentIcon"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn] title: @"1033" frame: CGRectMake(photoContentViewWidth / 2 - 25, photoContentViewHeight - 100, 50, 50)];
     [photoView addSubview: commentButton];
-    UIButton *focusButton = [self createButtonWithImage: [UIImage imageNamed:@"FollowIcon"] title: @"120" frame: CGRectMake(photoContentViewWidth - 100, photoContentViewHeight - 100, 50, 50)];
+    UIButton *focusButton = [self createButtonWithImage: [[UIImage imageNamed:@"FollowIcon"] imageWithTintColor: [ColorUtils mainColor] blendMode: kCGBlendModeDestinationIn] title: @"120" frame: CGRectMake(photoContentViewWidth - 100, photoContentViewHeight - 100, 50, 50)];
     [photoView addSubview: focusButton];
     
     return photoView;
