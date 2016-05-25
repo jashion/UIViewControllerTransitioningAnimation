@@ -41,7 +41,7 @@
 - (instancetype)initWithTitle: (NSString *)title image: (UIImage *)image {
     if (self = [super init]) {
         self.navigationItem.title = title;
-        self.hidesBottomBarWhenPushed = YES;        
+        self.hidesBottomBarWhenPushed = YES;
         _transition = [BMAnimateTransition new];
         _interactive = [BMInteractiveTransition new];
         topImage = image;

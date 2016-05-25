@@ -50,7 +50,7 @@
         
         self.snapView.frame = self.initalFrame;
         [container addSubview: self.snapView];
-        
+                
         [UIView animateWithDuration: self.duration delay: 0.0 usingSpringWithDamping: 0.7 initialSpringVelocity: 1.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
             self.snapView.frame = self.finalFrame;
             toVC.view.alpha = 1.f;
@@ -97,7 +97,7 @@
         UIBezierPath *initalPath = [UIBezierPath bezierPathWithOvalInRect: self.initalFrame];
         UIBezierPath *finalPath = [UIBezierPath bezierPathWithArcCenter: initalPoint radius: radius startAngle: 0 endAngle: M_PI * 2 clockwise: YES];
         
-        [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionCircleLayerPush"];
+        [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionCircleLayerPush" animationDuration: self.duration];
         
         self.snapView.frame = self.initalFrame;
         [container addSubview: self.snapView];
@@ -123,7 +123,7 @@
         UIBezierPath *initalPath = [UIBezierPath bezierPathWithArcCenter: initalPoint radius: radius startAngle: 0 endAngle: M_PI * 2 clockwise: YES];
         UIBezierPath *finalPath = [UIBezierPath bezierPathWithOvalInRect: self.finalFrame];
         
-        [self circleMaskLayerAnimateWithController: fromVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionCircleLayerPop"];
+        [self circleMaskLayerAnimateWithController: fromVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionCircleLayerPop" animationDuration: self.duration];
         
         self.finalView.frame = self.finalFrame;
         [container addSubview: self.finalView];
@@ -157,7 +157,7 @@
         UIBezierPath *initalPath = [UIBezierPath bezierPathWithOvalInRect: initalFrame];
         UIBezierPath *finalPath = [UIBezierPath bezierPathWithArcCenter: initalPoint radius: radius startAngle: 0 endAngle: M_PI * 2 clockwise: YES];
         
-        [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionTabBarCircleLayer"];
+        [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionTabBarCircleLayer" animationDuration: self.duration];
         return;
     }
 }
@@ -187,13 +187,13 @@
     return radius;
 }
 
-- (void)circleMaskLayerAnimateWithController: (UIViewController *)controller fromPath: (CGPathRef)fromPath toPath: (CGPathRef)toPath animationKeyName: (NSString *)keyName{
+- (void)circleMaskLayerAnimateWithController: (UIViewController *)controller fromPath: (CGPathRef)fromPath toPath: (CGPathRef)toPath animationKeyName: (NSString *)keyName animationDuration: (NSTimeInterval)duration{
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.path = toPath;
     
     controller.view.layer.mask = maskLayer;
     CABasicAnimation *maskLayerAnimation = [CABasicAnimation animationWithKeyPath: @"path"];
-    maskLayerAnimation.duration = 0.4;
+    maskLayerAnimation.duration = duration;
     maskLayerAnimation.fromValue = (__bridge id)fromPath;
     maskLayerAnimation.toValue = (__bridge id)toPath;
     maskLayerAnimation.delegate = self;
