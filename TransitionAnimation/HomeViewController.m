@@ -12,6 +12,8 @@
 #import "ColorUtils.h"
 #import "BMAnimateTransition.h"
 #import "BMInteractiveTransition.h"
+#import "FXBlurView.h"
+#import "MenuViewController.h"
 
 @interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
@@ -53,6 +55,17 @@
     [super viewDidLoad];
     
     self.navigationController.delegate = self;
+    
+    UIButton *leftButton = [UIButton buttonWithType: UIButtonTypeCustom];
+    leftButton.frame = CGRectMake(0, 0, 40, 44);
+    [leftButton setImage: [UIImage imageNamed:@"HomeMenu"] forState: UIControlStateNormal];
+    [leftButton addTarget: self action: @selector(showMenuController) forControlEvents: UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
+    spaceItem.width = - 8;
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView: leftButton];
+    
+    self.navigationItem.leftBarButtonItems = @[spaceItem, leftItem];
 }
 
 #pragma mark - UITableViewDataSource
@@ -119,6 +132,23 @@
     
     
     return self.interactive.interacting ? self.interactive : nil;
+}
+
+#pragma mark - Event Respose
+
+- (void)showMenuController {
+    UIView *snapShotView = [self.view snapshotViewAfterScreenUpdates: NO];
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, [UIScreen mainScreen].scale);
+    [snapShotView.layer renderInContext: UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
+    imageView.frame = CGRectMake(0, 0, 300, 500);
+    [self.view addSubview: imageView];
+
+//    MenuViewController *menuVC = [[MenuViewController alloc] initWithBackgroundImage: [image blurredImageWithRadius: 5 iterations:10 tintColor: [UIColor blackColor]]];
+//    [self presentViewController: menuVC animated: YES completion: nil];
 }
 
 @end
