@@ -15,7 +15,9 @@ typedef NS_ENUM(NSInteger, BMAnimateTransitionOPerationType) {
     BMAnimateTransitionSnapViewTransformPop       =  2,
     BMAnimateTransitionCircleLayerPush            =  3,
     BMAnimateTransitionCircleLayerPop             =  4,
-    BMAnimateTransitionTabBarCircleLayer          =  5
+    BMAnimateTransitionTabBarCircleLayer          =  5,
+    BMAnimateTransitionPresentFadeIn              =  6,
+    BMAnimateTransitionPresentFadeOut             =  7
 };
 
 @interface BMAnimateTransition : NSObject<UIViewControllerAnimatedTransitioning>

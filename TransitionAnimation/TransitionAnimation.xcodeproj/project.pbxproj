@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1D0675E61CF5F90F00EA3FCC /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0675E51CF5F90F00EA3FCC /* MenuViewController.m */; };
-		1D0675EC1CFE769700EA3FCC /* BMPhotoDataHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0675EB1CFE769700EA3FCC /* BMPhotoDataHandle.m */; };
 		1D1EE3EC1CDA0CD700896447 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1EE3EB1CDA0CD700896447 /* main.m */; };
 		1D1EE3EF1CDA0CD700896447 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1EE3EE1CDA0CD700896447 /* AppDelegate.m */; };
 		1D1EE3F71CDA0CD700896447 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D1EE3F61CDA0CD700896447 /* Assets.xcassets */; };
@@ -26,14 +25,11 @@
 		1D66BE181CDE046200D6B038 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66BE171CDE046200D6B038 /* ColorUtils.m */; };
 		1D7CF2D61CE7176100F188AC /* BMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CF2D51CE7176100F188AC /* BMTabBarController.m */; };
 		1D7CF2DD1CE77D9200F188AC /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CF2DC1CE77D9100F188AC /* UIImage+Tint.m */; };
-		1DB7ECA51CF19B5E00D361D4 /* PhotoFromLocal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB7ECA31CF19B5E00D361D4 /* PhotoFromLocal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D0675E41CF5F90F00EA3FCC /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		1D0675E51CF5F90F00EA3FCC /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		1D0675EA1CFE769700EA3FCC /* BMPhotoDataHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMPhotoDataHandle.h; sourceTree = "<group>"; };
-		1D0675EB1CFE769700EA3FCC /* BMPhotoDataHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMPhotoDataHandle.m; sourceTree = "<group>"; };
 		1D1EE3E71CDA0CD700896447 /* TransitionAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitionAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D1EE3EB1CDA0CD700896447 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1D1EE3ED1CDA0CD700896447 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,8 +64,6 @@
 		1D7CF2D51CE7176100F188AC /* BMTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMTabBarController.m; sourceTree = "<group>"; };
 		1D7CF2DB1CE77D9100F188AC /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tint.h"; sourceTree = "<group>"; };
 		1D7CF2DC1CE77D9100F188AC /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tint.m"; sourceTree = "<group>"; };
-		1DB7ECA31CF19B5E00D361D4 /* PhotoFromLocal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoFromLocal.m; sourceTree = "<group>"; };
-		1DB7ECA41CF19B5E00D361D4 /* PhotoFromLocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoFromLocal.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,15 +84,6 @@
 				1D299F731CDF8D21003E4AAA /* FXBlurView.m */,
 			);
 			name = Blur;
-			sourceTree = "<group>";
-		};
-		1D0675E91CFE767900EA3FCC /* BMAlbum */ = {
-			isa = PBXGroup;
-			children = (
-				1D0675EA1CFE769700EA3FCC /* BMPhotoDataHandle.h */,
-				1D0675EB1CFE769700EA3FCC /* BMPhotoDataHandle.m */,
-			);
-			name = BMAlbum;
 			sourceTree = "<group>";
 		};
 		1D1EE3DE1CDA0CD700896447 = {
@@ -258,9 +243,6 @@
 		1DB7ECA21CF19A9600D361D4 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				1D0675E91CFE767900EA3FCC /* BMAlbum */,
-				1DB7ECA41CF19B5E00D361D4 /* PhotoFromLocal.h */,
-				1DB7ECA31CF19B5E00D361D4 /* PhotoFromLocal.m */,
 			);
 			name = Widgets;
 			sourceTree = "<group>";
@@ -333,7 +315,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D0675EC1CFE769700EA3FCC /* BMPhotoDataHandle.m in Sources */,
 				1D299F701CDEC594003E4AAA /* PersonProfileViewController.m in Sources */,
 				1D0675E61CF5F90F00EA3FCC /* MenuViewController.m in Sources */,
 				1D1EE41B1CDA3F8800896447 /* DetailController.m in Sources */,
@@ -348,7 +329,6 @@
 				1D299F751CDF8D21003E4AAA /* FXBlurView.m in Sources */,
 				1D1EE42A1CDABA0E00896447 /* SettingViewController.m in Sources */,
 				1D1EE4241CDAB9DE00896447 /* HomeViewController.m in Sources */,
-				1DB7ECA51CF19B5E00D361D4 /* PhotoFromLocal.m in Sources */,
 				1D299F781CE022CB003E4AAA /* PhotoCircleController.m in Sources */,
 				1D1EE4271CDAB9F200896447 /* MessageViewController.m in Sources */,
 				1D1EE3EC1CDA0CD700896447 /* main.m in Sources */,

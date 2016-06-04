@@ -19,7 +19,7 @@
 
 - (void)loadView {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithRed:0.800 green:1.000 blue:0.800 alpha:1.000];
+    self.view.backgroundColor = [UIColor colorWithRed:1.000 green:0.800 blue:0.400 alpha:1.000];
 }
 
 @end

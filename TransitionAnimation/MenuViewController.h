@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class MenuViewController;
+
+@protocol HandleDismissMenuVC <NSObject>
+
+- (void)dismissWithMenuVC: (MenuViewController *)menuVC;
+
+@end
+
 @interface MenuViewController : UIViewController
+
+@property (nonatomic, weak) id<HandleDismissMenuVC> delegate;
 
 - (instancetype)initWithBackgroundImage: (UIImage *)backgroundImage;
 

@@ -15,7 +15,7 @@
 #import "FXBlurView.h"
 #import "MenuViewController.h"
 
-@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
+@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, HandleDismissMenuVC>
 
 @property (nonatomic, strong) BMAnimateTransition *transition;
 @property (nonatomic, strong) BMInteractiveTransition *interactive;
@@ -134,21 +134,38 @@
     return self.interactive.interacting ? self.interactive : nil;
 }
 
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    self.transition.operation = BMAnimateTransitionPresentFadeIn;
+    self.transition.duration = 0.4;
+    return self.transition;
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    self.transition.operation = BMAnimateTransitionPresentFadeOut;
+    self.transition.duration = 0.4;
+    return self.transition;
+}
+
+#pragma mark - HandleDismissMenuVC
+
+- (void)dismissWithMenuVC:(MenuViewController *)menuVC {
+    [menuVC dismissViewControllerAnimated: YES completion: nil];
+}
+
 #pragma mark - Event Respose
 
 - (void)showMenuController {
-    UIView *snapShotView = [self.view snapshotViewAfterScreenUpdates: NO];
-    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, [UIScreen mainScreen].scale);
-    [snapShotView.layer renderInContext: UIGraphicsGetCurrentContext()];
+    UIGraphicsBeginImageContextWithOptions([UIScreen mainScreen].bounds.size, NO, [UIScreen mainScreen].scale);
+    [[UIApplication sharedApplication].keyWindow drawViewHierarchyInRect: [UIScreen mainScreen].bounds afterScreenUpdates: YES];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
-    imageView.frame = CGRectMake(0, 0, 300, 500);
-    [self.view addSubview: imageView];
 
-//    MenuViewController *menuVC = [[MenuViewController alloc] initWithBackgroundImage: [image blurredImageWithRadius: 5 iterations:10 tintColor: [UIColor blackColor]]];
-//    [self presentViewController: menuVC animated: YES completion: nil];
+    MenuViewController *menuVC = [[MenuViewController alloc] initWithBackgroundImage: [image blurredImageWithRadius: 10 iterations: 20 tintColor: [UIColor blackColor]]];
+    menuVC.delegate = self;
+    menuVC.transitioningDelegate = self;
+    [self presentViewController: menuVC animated: YES completion: nil];
 }
 
 @end

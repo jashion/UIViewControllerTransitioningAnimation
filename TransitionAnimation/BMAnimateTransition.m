@@ -160,6 +160,31 @@
         [self circleMaskLayerAnimateWithController: toVC fromPath: initalPath.CGPath toPath: finalPath.CGPath animationKeyName: @"BMAnimateTransitionTabBarCircleLayer" animationDuration: self.duration];
         return;
     }
+    
+    if (self.operation == BMAnimateTransitionPresentFadeIn) {
+        [container addSubview: toVC.view];
+        
+        toVC.view.alpha = 0;
+        [UIView animateWithDuration: self.duration animations:^{
+            toVC.view.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition: ![transitionContext transitionWasCancelled]];
+        }];
+        
+        return;
+    }
+    
+    if (self.operation == BMAnimateTransitionPresentFadeOut) {
+        [container addSubview: toVC.view];
+        [container addSubview: fromVC.view];
+        
+        [UIView animateWithDuration: self.duration animations:^{
+            fromVC.view.alpha = 0;
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition: ![transitionContext transitionWasCancelled]];
+        }];
+        return;
+    }
 }
 
 #pragma mark - CAAnimationDelegate
