@@ -46,17 +46,17 @@
     deleteButton.frame = CGRectMake(20, 30, 23, 23);
     deleteButton.contentMode = UIViewContentModeScaleAspectFill;
     deleteButton.clipsToBounds = YES;
-    deleteButton.transform = CGAffineTransformMakeScale(0, 0);
-    [deleteButton setImage: [UIImage imageNamed:@"DeleteIcon"] forState: UIControlStateNormal];
+//    deleteButton.transform = CGAffineTransformMakeScale(0, 0);
+    [deleteButton setImage: [UIImage imageNamed:@"DeleteButtonIcon"] forState: UIControlStateNormal];
     [deleteButton addTarget: self action: @selector(back) forControlEvents: UIControlEventTouchUpInside];
     [self.view addSubview: deleteButton];
     
-    [UIView animateWithDuration: 0.6 delay: 0 usingSpringWithDamping: 0.5 initialSpringVelocity: 1.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-        deleteButton.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
+//    [UIView animateWithDuration: 0.6 delay: 0 usingSpringWithDamping: 0.5 initialSpringVelocity: 1.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
+//        deleteButton.transform = CGAffineTransformIdentity;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//    
     CGRect rect = self.view.bounds;
     titleLabels = @[].mutableCopy;
     for (NSInteger index = 0; index < titles.count; index++) {

@@ -138,13 +138,13 @@
         currentContentView.center = CGPointMake(kScreenWidth * 3 / 2, kScreenHeight / 2 + percent * changeHeight);
     }
     
-    if (offsetX == 0) {
+    if (offsetX <= 0) {
         currentImageIndex = currentImageIndex == 0 ? imagesArray.count - 1: currentImageIndex - 1;
         frontImageView.image = [self frontImageWithIndex: currentImageIndex];
         currentImageView.image = [self currentImageWithIndex: currentImageIndex];
         nextImageView.image = [self nextImageWithIndex: currentImageIndex];
         [myScrollView setContentOffset: CGPointMake(kScreenWidth, 0)];
-    } else if (offsetX == kScreenWidth * 2) {
+    } else if (offsetX >= kScreenWidth * 2) {
         currentImageIndex = currentImageIndex == (imagesArray.count - 1) ? 0: currentImageIndex + 1;
         frontImageView.image = [self frontImageWithIndex: currentImageIndex];
         currentImageView.image = [self currentImageWithIndex: currentImageIndex];

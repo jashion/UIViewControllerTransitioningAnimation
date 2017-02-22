@@ -8,7 +8,7 @@
 
 #import "BMAnimateTransition.h"
 
-@interface BMAnimateTransition ()
+@interface BMAnimateTransition ()<CAAnimationDelegate>
 
 @property (nonatomic, strong) id<UIViewControllerContextTransitioning> transitionContext;
 

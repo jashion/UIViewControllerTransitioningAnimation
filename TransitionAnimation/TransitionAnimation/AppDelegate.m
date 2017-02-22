@@ -18,7 +18,7 @@
 
 #define kRect [UIScreen mainScreen].bounds
 
-@interface AppDelegate ()<UITabBarControllerDelegate>
+@interface AppDelegate ()<UITabBarControllerDelegate, CAAnimationDelegate>
 
 @property (nonatomic, assign) CGPoint tapPoint;
 @property (nonatomic, strong) BMAnimateTransition *transition;
