@@ -32,13 +32,13 @@
 
 ![层级关系.png](http://upload-images.jianshu.io/upload_images/968977-33c61736af4698c3.png)
 
-解析一下上图的层级关系：
-1.UIKit应用于iOS，AppKit应用于Mac OS，可想iOS和Mac OS开发有很多相似之处。
-2.QuartzCore包含Core Animation。
-3.OpenGL ES是跨平台的图形API，属于OpenGL的一个简化版本，是应用程序编程接口，也就是说它只定义了一套规范，具体的实现由设备制造商根据规范去做。QuartZ 2D是苹果公司开发的一套API，它是Core Graphics Framework的一部分，是一套基于C的API框架，使用了Quartz作为绘图引擎。
-4.OpenGL ES可以绘制2D和3D图形，Core Graphics只能绘制2D图形。
-5.CATransform3D包含于Core Animation里面；CGAffineTransform包含于Core Graphics里面。
-6.一般从绘制性能来说：OpenGL ES > Core Graphics > Core Animation，从使用简易来说：Core Animation > Core Graphics > OpenGL ES
+### 解析一下上图的层级关系：<br>
+1.UIKit应用于iOS，AppKit应用于Mac OS，可想iOS和Mac OS开发有很多相似之处。<br>
+2.QuartzCore包含Core Animation。<br>
+3.OpenGL ES是跨平台的图形API，属于OpenGL的一个简化版本，是应用程序编程接口，也就是说它只定义了一套规范，具体的实现由设备制造商根据规范去做。QuartZ 2D是苹果公司开发的一套API，它是Core Graphics Framework的一部分，是一套基于C的API框架，使用了Quartz作为绘图引擎。<br>
+4.OpenGL ES可以绘制2D和3D图形，Core Graphics只能绘制2D图形。<br>
+5.CATransform3D包含于Core Animation里面；CGAffineTransform包含于Core Graphics里面。<br>
+6.一般从绘制性能来说：OpenGL ES > Core Graphics > Core Animation，从使用简易来说：Core Animation > Core Graphics > OpenGL ES<br>
 
 # 4.iOS动画实现
 
