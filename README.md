@@ -3,29 +3,35 @@
 
 前言
 ----
+
 由于本人喜欢有趣的动效，在刚开始学习iOS开发时就自己捣腾iOS动画。当时什么也不懂，而且虽然现在看来iOS动画的实现方式就那么几种，但是刚开始弄的时候还是挺费劲的。嘿嘿，虽然现在也不算很牛，但也算入门。我来抛砖引玉了，说的不好不要打我😊。
 
 1.什么是动画？
 ----
+
 动画，电影，电视，漫画，以前傻傻的分不清，其实也好区分，很明显漫画是不会动的，比如我喜欢看的死神，火影，海贼，动画和电影神马的都是能动的，但是也有点不一样，动画是画出来的，电影则是拍出来的，呵呵哒。
 其实，我觉得一切动画都可以分解成一幅幅画面，所谓的帧动画，只要够强大，什么都挡不住一只笔的风骚。😍
 2.为何是60FPS（60帧／秒）？
 ----
+
 说这个问题之前，我们先说一下电影的24FPS和游戏的60FPS，一部流畅的电影只需24FPS即可，但是游戏24FPS可能会很卡。why?
 有两个原因：
 ######（1）电影成像和游戏成像的原理不一样
+
 电影每一帧都包含了一段时间的信息，而游戏则只包含那一瞬间的信息。举个例子，拍照片。如果设置曝光时间过长，则会出现模糊，因为这段时间相机里面的场景变化的痕迹都记录在照片中了，所以会出现模糊不清的照片，如下图：
 
 ![twocat.png](http://upload-images.jianshu.io/upload_images/968977-e07aab2267758586.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 一只模糊的猫头😄，其实这也可以看作一段时间内多帧糅合在一起了。电影虽然帧数低，但是上一针储存了到下一针所需要的变化，所以看起来可以连贯，就像阳光照射在人的视网膜上，会有停留时间。想象一下，站在你对面的人向你招手，速度从慢到快，你是否也不会感觉到卡顿呢？（如果能感觉到卡顿，这个世界就精彩了，想象一下奥运会的短跑项目😄）。而游戏则不一样，游戏显示在屏幕的每一帧都是先经过CPU的处理，然后再经过GPU的处理，最后才会显示在电子屏幕上面（电子屏幕显示相关的细节可以看一下ibireme大神的[iOS保持界面流畅的技巧](http://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/)）。简单来说就是上一帧没有保留下一帧过度所需要的变化，所以，一旦前后画面变化过大，则会感觉到卡顿，因为是突然变化，措手不及。
 #####（2）电影的FPS是稳定的，而游戏则是不稳定的
+
 这个可以这样理解，电影一秒24帧，每帧之间的时间间隔是一样的，稳定的，而游戏比如前面30帧时间间隔比较短，后面30帧的时间间隔比较长，也会感觉卡顿，这也是为什么有同样的帧数，有的应用感觉卡顿，有的不卡的原因。
 
 总的来说，帧数越多也不一定不卡顿，但是应用显示的帧数在30～60之间一般不会感觉到明显的卡顿。貌似是因为人眼的视觉停留时间为1/24秒，具体是什么鬼，大家自行Google。
 
 3.iOS动画的层级结构
 ----
-![层级关系.png](http://upload-images.jianshu.io/upload_images/968977-33c61736af4698c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![层级关系.png](http://upload-images.jianshu.io/upload_images/968977-33c61736af4698c3.png)
 解析一下上图的层级关系：
 1.UIKit应用于iOS，AppKit应用于Mac OS，可想iOS和Mac OS开发有很多相似之处。
 2.QuartzCore包含Core Animation。
@@ -35,8 +41,10 @@
 6.一般从绘制性能来说：OpenGL ES > Core Graphics > Core Animation，从使用简易来说：Core Animation > Core Graphics > OpenGL ES
 4.iOS动画实现
 ----
+
 首先要清楚CALayer的概念，在MVC框架里面，View是负责用户界面显示的，显而易见，Apple刚开始就让iOS遵循MVC框架，UIView负责显示界面。然而，CALayer才是绘制页面的功臣，UIView只是负责管理CALayer的行为。CALayer里包含了三种树呈现树（presentationLayer tree）,模型树（modelLayer tree）以及渲染树（render tree），其中呈现树主要记录了图层从动画开始到结束的所有变化，模型树只记录了最终结果，而渲染树顾名思义是渲染到屏幕上显示的。
 #####（1）CoreAnimation（基本动画）
+
 ![CoreAnimation.png](http://upload-images.jianshu.io/upload_images/968977-aab85a824844ee31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 由上图可见CA动画分组动画（CAAnimationGroup），属性动画（CAPropertyAnimation）和转场动画（CATransition），其中属性动画又分为基本动画（CABasicAnimation）和帧动画（CAKeyframAnimation），CA动画还实现了CAMediaTiming接口，提供一些和动画时间有关的功能。
 *  CABasicAnimation
